@@ -9,3 +9,23 @@
 
 ### Notes:
 1) Storing occurences of characters in hashmap
+
+## Code
+```{py}
+def characterReplacement(self, s: str, k: int) -> int:
+        hash_table = {}
+        left = 0
+        maxf = 0
+        maxlen = 0
+        for right in range(len(s)):
+            hash_table[s[right]] = 1 + hash_table.get(s[right], 0)
+            maxf = max(maxf, hash_table[s[right]])
+
+            if (right - left + 1) - maxf > k: 
+                hash_table[s[left]] -= 1
+                left += 1
+            
+            maxlen = max(right - left + 1, maxlen)
+
+        return maxlen
+```        
